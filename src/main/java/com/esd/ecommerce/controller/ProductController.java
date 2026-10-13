@@ -19,11 +19,11 @@ public class ProductController {
     @GetMapping("/get-all")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
-        return ResponseEntity.ok(products);
+        return ResponseEntity.status(HttpStatus.OK).body(products);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+    public ResponseEntity<Object> getProductById(@PathVariable Long id) {
 
         Product product = productService.getProductById(id);
 
@@ -32,7 +32,7 @@ public class ProductController {
                     .body("Product with ID " + id + " not found");
         }
 
-        return ResponseEntity.ok(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @PostMapping("/add-product")
@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateProduct(
+    public ResponseEntity<Object> updateProduct(
             @PathVariable Long id,
             @RequestBody Product product) {
 
@@ -55,7 +55,7 @@ public class ProductController {
                     .body("Product with ID " + id + " not found");
         }
 
-        return ResponseEntity.ok(updatedProduct);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -63,6 +63,6 @@ public class ProductController {
 
         productService.deleteProduct(id);
 
-        return ResponseEntity.ok("Product with ID " + id + " deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Product with ID " + id + " deleted successfully");
     }
 }

@@ -22,7 +22,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-id/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id) {
 
         Product product = productService.getProductById(id);
@@ -35,7 +35,7 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    @GetMapping("/get/{category}")
+    @GetMapping("/get-category/{category}")
     public ResponseEntity<?> getProductByCategory(@PathVariable String category) {
         List<Product> products = productService.getProductsByCategory(category);
         return ResponseEntity.status(HttpStatus.OK).body(products);

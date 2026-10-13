@@ -19,11 +19,11 @@ public class ProductController {
     @GetMapping("/get-all")
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Object> getProductById(@PathVariable Long id) {
+    public ResponseEntity<?> getProductById(@PathVariable Long id) {
 
         Product product = productService.getProductById(id);
 
@@ -32,9 +32,14 @@ public class ProductController {
                     .body("Product with ID " + id + " not found");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(product);
+        return ResponseEntity.ok(product);
     }
 
+    @GetMapping("/get/{category}")
+    public ResponseEntity<?> getProductByCategory(@PathVariable String category) {
+        List<Product> products = productService.getProductsByCategory(category);
+        return ResponseEntity.status(HttpStatus.OK).body(products);
+    }
     @PostMapping("/add-product")
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
 
@@ -44,7 +49,7 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updateProduct(
+    public ResponseEntity<?> updateProduct(
             @PathVariable Long id,
             @RequestBody Product product) {
 
@@ -55,7 +60,7 @@ public class ProductController {
                     .body("Product with ID " + id + " not found");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
+        return ResponseEntity.ok(updatedProduct);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -63,6 +68,6 @@ public class ProductController {
 
         productService.deleteProduct(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Product with ID " + id + " deleted successfully");
+        return ResponseEntity.ok("Product with ID " + id + " deleted successfully");
     }
 }

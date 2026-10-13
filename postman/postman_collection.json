@@ -1,0 +1,17 @@
+//Add Product
+{
+  "name": "USB-C Hub",
+  "description": "7-in-1 USB-C Hub",
+  "price": 2499.00,
+  "category": "Accessories",
+  "stock": 20
+}
+
+//Update Product
+{
+  "name": "Gaming Laptop",
+  "description": "15-inch gaming laptop",
+  "price": 85000.00,
+  "category": "Electronics",
+  "stock": 8
+}
